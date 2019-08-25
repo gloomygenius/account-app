@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: revolut.account
+---
+testFramework: spek
+sourceLanguage: kotlin
