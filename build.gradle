@@ -37,6 +37,9 @@ dependencies {
     runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testImplementation "org.jetbrains.spek:spek-api:1.1.5"
+    testImplementation "io.micronaut.test:micronaut-test-junit5:1.1.0"
+    testImplementation "io.micronaut.test:micronaut-test-kotlintest:1.1.0"
+    testImplementation "io.mockk:mockk:1.9.3"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
     testRuntimeOnly "org.jetbrains.spek:spek-junit-platform-engine:1.1.5"
 }
