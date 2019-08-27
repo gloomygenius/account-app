@@ -10,8 +10,8 @@ data class NewTransactionRequest(
 ) {
     fun toModel(): NewTransaction {
         return NewTransaction(
-                senderAccount = senderAccount,
-                receiverAccount = receiverAccount,
+                debtorAccountNumber = senderAccount,
+                creditorAccountNumber = receiverAccount,
                 amount = amount
         )
     }
