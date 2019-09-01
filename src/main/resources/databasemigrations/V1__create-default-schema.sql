@@ -2,7 +2,7 @@ CREATE table account
 (
     number   INT PRIMARY KEY AUTO_INCREMENT,
     balance  NUMERIC(8, 2) NOT NULL,
-    revision INT           NOT NULL
+    revision INT default 0 NOT NULL
 );
 
 

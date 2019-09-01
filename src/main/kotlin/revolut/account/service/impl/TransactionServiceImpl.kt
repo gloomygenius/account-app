@@ -8,10 +8,9 @@ import revolut.account.dao.TransactionDao
 import revolut.account.service.TransactionService
 import revolut.account.service.entity.Account
 import revolut.account.service.entity.Transaction
-import revolut.account.service.exception.AbsentReceiverAccountException
-import revolut.account.service.exception.AbsentSenderAccountException
-import revolut.account.service.exception.AccountModificationException
+import revolut.account.service.exception.*
 import revolut.account.service.model.NewTransaction
+import java.math.BigDecimal
 import javax.inject.Singleton
 import javax.persistence.OptimisticLockException
 
@@ -23,6 +22,12 @@ open class TransactionServiceImpl(private val accountDao: AccountDao,
     @Transactional
     override fun createTransaction(newTransaction: NewTransaction) {
         try {
+            if (newTransaction.amount <= BigDecimal.ZERO) {
+                throw NegativeTransactionAmountException(newTransaction.amount)
+            }
+            if (newTransaction.creditorAccountNumber == newTransaction.debtorAccountNumber) {
+                throw SameAccountsException(newTransaction.creditorAccountNumber)
+            }
             val debtorAccount = accountDao.findByNumber(newTransaction.debtorAccountNumber)
                     ?: throw AbsentSenderAccountException(newTransaction.debtorAccountNumber)
 
