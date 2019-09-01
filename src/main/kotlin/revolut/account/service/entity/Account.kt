@@ -1,32 +1,27 @@
 package revolut.account.service.entity
 
-import revolut.account.service.exception.InsufficientBalanceException
+import revolut.account.service.exception.ChargeAmountException
 import java.math.BigDecimal
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
+import javax.persistence.Version
 
-class Account(
-        val number: Int,
+@Entity
+@Table(name = "account")
+data class Account(
+        @Id
+        var number: Int,
         var balance: BigDecimal,
-        var lockedBalance: BigDecimal,
-        var revision: Int = 0
+        @Version
+        val revision: Int = 0
 ) {
-    fun lockMoney(amount: BigDecimal) {
-        if (balance - lockedBalance < amount) {
-            throw InsufficientBalanceException()
-        }
-        lockedBalance += amount
-    }
-
     fun increaseBalance(amount: BigDecimal) {
         balance += amount
     }
 
-    fun unlockMoney(amount: BigDecimal) {
-        lockedBalance -= amount
-    }
-
     fun charge(amount: BigDecimal) {
-        lockedBalance -= amount
+        if (balance < amount) throw ChargeAmountException(this, amount)
         balance -= amount
     }
-
 }

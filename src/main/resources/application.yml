@@ -1,3 +1,22 @@
 micronaut:
   application:
     name: account-app
+datasources:
+  default:
+    url: ${JDBC_URL:`jdbc:h2:~/revolut-test;AUTO_SERVER=TRUE`}
+    username: ${JDBC_USER:sa}
+    password: ${JDBC_PASSWORD:""}
+    driverClassName: ${JDBC_DRIVER:org.h2.Driver}
+jpa:
+  default:
+    packages-to-scan:
+      - 'revolut.account.service.entity'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        show_sql: true
+flyway:
+  datasources:
+    default:
+      locations: classpath:databasemigrations
