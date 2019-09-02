@@ -2,10 +2,14 @@
 1. Java 8+
 2. Gradle 5+
 
-###Build project:
-
+###Build project
+Run in terminal:
 ```
 gradle build
+```
+or
+```
+./gradlew build
 ```
 
 ###Run server
@@ -18,6 +22,7 @@ java -jar build/libs/account-app-0.1-all.jar
 ```
 
 ####Examples
+
 There are two predefined accounts: 111111(amount:300) and 222222(amount:500)
 
 POST localhost:8080/transaction
